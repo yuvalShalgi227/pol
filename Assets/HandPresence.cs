@@ -5,11 +5,12 @@ using UnityEngine.XR;
 
 public class HandPresence : MonoBehaviour
 {
-    public List<GameObject> ControllerPrefabs;
+    public List<GameObject> controllerPrefabs;
 
+    public bool showController = false;
     private InputDevice targetDevice;
     private GameObject handModulePrefab;
-    private GameObject SpwanhandModule;
+    private GameObject spwanedHandModule;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,21 @@ public class HandPresence : MonoBehaviour
         if (devices.Count > 0)
         {
             targetDevice = devices[0];
+            GameObject prefab = controllerPrefabs.Find(controller => controller.name == targetDevice.name);
+            if (prefab)
+            {
+                spwanedHandModule = Instantiate(prefab, transform);
+            }
+            else
+            {
+                Debug.LogError("Did not find corrseponding controller model");
+                //spwanedHandModule = Instantiate(handModulePrefab, transform);
+                spwanedHandModule = Instantiate(controllerPrefabs[0], transform);
+
+            }
         }
+
+
     }
     // Update is called once per frame
     void Update()
@@ -35,19 +50,9 @@ public class HandPresence : MonoBehaviour
 
         Debug.Log("res" + res.ToString());
 
-        if (targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out res) && res )
-        {
-            Debug.Log("Pressing Primary Button");
-        }
+        spwanedHandModule.SetActive(true);
 
-        if (targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue) && triggerValue > 0.1f) 
-        {
-            Debug.Log("Trigger Pressed" + triggerValue);
-        }
 
-        if (targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 primary2DAxisValue) && primary2DAxisValue != Vector2.zero)
-        {
-            Debug.Log("Primary Touchpad " + primary2DAxisValue);
-        }
+
     }
 }
