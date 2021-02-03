@@ -5,39 +5,53 @@ using UnityEngine.XR;
 
 public class HandPresence : MonoBehaviour
 {
+    public InputDeviceCharacteristics controllerCharacteristics;
     public List<GameObject> controllerPrefabs;
-
     public bool showController = false;
+    public GameObject handModelPrefab; 
+    
     private InputDevice targetDevice;
-    private GameObject handModulePrefab;
-    private GameObject spwanedHandModule;
+    private GameObject spawnedController;
+    private GameObject spawnedHandModel;
+
+    private bool instantiate = false;
     // Start is called before the first frame update
     void Start()
     {
         List<InputDevice> devices = new List<InputDevice>();
-        InputDeviceCharacteristics rightControllerCharactersitics = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
-        InputDevices.GetDevicesWithCharacteristics(rightControllerCharactersitics, devices);
+        InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
+
 
         foreach (var item in devices)
         {
             Debug.Log(item.name + item.characteristics);
         }
-
+        Debug.Log("before devices count");
         if (devices.Count > 0)
         {
+            instantiate = true;
             targetDevice = devices[0];
             GameObject prefab = controllerPrefabs.Find(controller => controller.name == targetDevice.name);
             if (prefab)
             {
-                spwanedHandModule = Instantiate(prefab, transform);
+                spawnedController = Instantiate(prefab, transform);
             }
             else
             {
                 Debug.LogError("Did not find corrseponding controller model");
                 //spwanedHandModule = Instantiate(handModulePrefab, transform);
-                spwanedHandModule = Instantiate(controllerPrefabs[0], transform);
+                spawnedController = Instantiate(controllerPrefabs[0], transform);
 
             }
+
+            Debug.Log("now instantiate handmodelPrefab");
+            spawnedHandModel = Instantiate(handModelPrefab, transform);
+            Debug.Log("instantiated handmodelPrefab" + spawnedHandModel.ToString());
+
+        }
+        else
+        {
+            Debug.LogError("no devices");
         }
 
 
@@ -45,12 +59,31 @@ public class HandPresence : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print("targetDevice:" + targetDevice.name);
-        bool res = targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonValue1);
+        if (instantiate)
+        {
+            spawnedHandModel.SetActive(true);
+            if (instantiate)
+            {
+                if (showController)
+                {
+                    spawnedHandModel.SetActive(false);
+                    spawnedController.SetActive(true);
+                }
+                else
+                {
+                    spawnedHandModel.SetActive(true);
+                    spawnedController.SetActive(false);
+                }
+            }
+        }
 
-        Debug.Log("res" + res.ToString());
 
-        spwanedHandModule.SetActive(true);
+        //print("targetDevice:" + targetDevice.name);
+        //bool res = targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonValue1);
+
+        //Debug.Log("res" + res.ToString());
+
+        //spwanedHandModule.SetActive(true);
 
 
 
