@@ -5,7 +5,11 @@ using UnityEngine.XR;
 
 public class HandPresence : MonoBehaviour
 {
+    public List<GameObject> ControllerPrefabs;
+
     private InputDevice targetDevice;
+    private GameObject handModulePrefab;
+    private GameObject SpwanhandModule;
     // Start is called before the first frame update
     void Start()
     {
