@@ -13,10 +13,37 @@ public class HandPresence : MonoBehaviour
     private InputDevice targetDevice;
     private GameObject spawnedController;
     private GameObject spawnedHandModel;
+    private Animator handAnimator;
 
     private bool instantiate = false;
     // Start is called before the first frame update
     void Start()
+    {
+        TryInitialize();
+    }
+    // Update is called once per frame
+    void UpdateHandAnimation()
+    {
+        if(targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
+        {
+            handAnimator.SetFloat("Trigger", triggerValue);
+        }
+        else
+        {
+            handAnimator.SetFloat("Trigger", 0);
+        }
+
+        if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue))
+        {
+            handAnimator.SetFloat("Grip", gripValue);
+        }
+        else
+        {
+            handAnimator.SetFloat("Grip", 0);
+        }
+    }
+
+    void TryInitialize()
     {
         List<InputDevice> devices = new List<InputDevice>();
         InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
@@ -46,35 +73,43 @@ public class HandPresence : MonoBehaviour
 
             Debug.Log("now instantiate handmodelPrefab");
             spawnedHandModel = Instantiate(handModelPrefab, transform);
-            Debug.Log("instantiated handmodelPrefab" + spawnedHandModel.ToString());
+            handAnimator = spawnedHandModel.GetComponent<Animator>();
+
+            Debug.Log("instantiated hand modelPrefab" + spawnedHandModel.ToString());
 
         }
         else
         {
             Debug.LogError("no devices");
         }
-
-
     }
-    // Update is called once per frame
     void Update()
     {
-        if (instantiate)
+        if(!targetDevice.isValid)
         {
-            spawnedHandModel.SetActive(true);
+            TryInitialize();
+        }
+        else
+        {
             if (instantiate)
             {
-                if (showController)
+                spawnedHandModel.SetActive(true);
+                if (instantiate)
                 {
-                    spawnedHandModel.SetActive(false);
-                    spawnedController.SetActive(true);
-                }
-                else
-                {
-                    spawnedHandModel.SetActive(true);
-                    spawnedController.SetActive(false);
+                    if (showController)
+                    {
+                        spawnedHandModel.SetActive(false);
+                        spawnedController.SetActive(true);
+                    }
+                    else
+                    {
+                        spawnedHandModel.SetActive(true);
+                        spawnedController.SetActive(false);
+                        UpdateHandAnimation();
+                    }
                 }
             }
+
         }
 
 
