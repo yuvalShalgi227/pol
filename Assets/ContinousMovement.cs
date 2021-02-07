@@ -6,10 +6,11 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ContinousMovement : MonoBehaviour
 {
-    public float speed = 1;
+    public float speed = 2;
     public XRNode inputSource;
     public float gravity = -9.81f;
     public LayerMask groundLayer;
+    public float addtionalHeight = 0.2f;
 
     private float fallingSpeed;
     private Vector2 inputAxis;
@@ -33,9 +34,11 @@ public class ContinousMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        CapsuleFollowHeadset();
+
         Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.eulerAngles.y, 0);
         Vector3 direction = headYaw * new Vector3(inputAxis.x, 0, inputAxis.y);
-
+        Debug.Log("speed: " + speed);
         character.Move(direction * Time.fixedDeltaTime * speed);
 
         //gravity
@@ -58,7 +61,12 @@ public class ContinousMovement : MonoBehaviour
 
         character.Move(fall);
     }
-
+    void CapsuleFollowHeadset()
+    {
+        character.height = rig.cameraInRigSpaceHeight + addtionalHeight;
+        Vector3 capsuleCenter = transform.InverseTransformPoint(rig.cameraGameObject.transform.position);
+        character.center = new Vector3(capsuleCenter.x, character.height / 2 + character.skinWidth, capsuleCenter.z); 
+    }
     bool CheckIfGrounded()
     {
         //tells us if we are on the ground
