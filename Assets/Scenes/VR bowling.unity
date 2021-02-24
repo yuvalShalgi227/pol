@@ -1214,8 +1214,59 @@ MonoBehaviour:
   seed: 0
   terrains:
   - {fileID: 913586076}
-  treeTypes: []
-  grassPrefabs: []
+  treeTypes:
+  - seed: 0
+    probability: 83.8
+    collisionCheck: 0
+    rejectUnderwater: 0
+    heightRange: {x: 121.95122, y: 292.68292}
+    slopeRange: {x: 0, y: 60}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks: []
+    instanceCount: 1245
+    prefabs:
+    - index: 0
+      probability: 100
+      prefab: {fileID: 1743353957770956, guid: 82a6bf9ca38d9d443997ccec084ba669, type: 3}
+    distance: 5
+    scaleRange: {x: 0.1902439, y: 0.4682927}
+    sinkAmount: 0
+  - seed: 0
+    probability: 10
+    collisionCheck: 0
+    rejectUnderwater: 0
+    heightRange: {x: 0, y: 1000}
+    slopeRange: {x: 0, y: 60}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks: []
+    instanceCount: 2242
+    prefabs:
+    - index: 1
+      probability: 100
+      prefab: {fileID: 1364922359172550, guid: 1aaf3ef80841d9c4990a27fee328eb1c, type: 3}
+    distance: 5
+    scaleRange: {x: 0, y: 0.27560976}
+    sinkAmount: 0
+  grassPrefabs:
+  - seed: 4129
+    probability: 25
+    collisionCheck: 0
+    rejectUnderwater: 0
+    heightRange: {x: 0, y: 1000}
+    slopeRange: {x: 0, y: 60}
+    curvatureRange: {x: 0, y: 1}
+    layerMasks: []
+    instanceCount: 0
+    index: 0
+    type: 0
+    prefab: {fileID: 0}
+    billboard: {fileID: 0}
+    mainColor: {r: 0.2692482, g: 0.6603774, b: 0, a: 1}
+    secondairyColor: {r: 0.2457143, g: 0.6037736, b: 0, a: 1}
+    linkColors: 0
+    minMaxHeight: {x: 0.5, y: 1}
+    minMaxWidth: {x: 0.8, y: 1.2}
+    noiseSize: 0.1
   terrainSettings:
     drawInstanced: 1
     detailDistance: 1000
@@ -6096,7 +6147,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18374
+  m_Name: pb_Mesh18600
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
