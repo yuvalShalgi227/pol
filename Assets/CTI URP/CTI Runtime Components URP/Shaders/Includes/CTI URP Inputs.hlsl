@@ -199,7 +199,7 @@
                 #endif
                 float2 uv, out SurfaceData outSurfaceData)
             {
-                
+				outSurfaceData = (SurfaceData)0;
                 #if defined(CTIBARKARRAY)
                     half4 albedoAlpha = SAMPLE_TEXTURE2D_ARRAY(_BaseMapArray, sampler_BaseMapArray, uv, colorVariation.y); 
                 #else

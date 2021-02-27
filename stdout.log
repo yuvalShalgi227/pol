@@ -1,0 +1,42 @@
+[LicensingClient] ERROR Failed to connect to local IPC
+[Licensing::Module] Failed to connect to channel: LicenseClient-NAMASTE$
+[Licensing::Module] Successfully launched the LicensingClient
+[Licensing::Module] Successfully connected to LicensingClient on channel: LicenseClient-NAMASTE$
+[Licensing::Module] Successfully launched and connected to LicensingClient
+Entitlement-based licensing initiated
+[LicensingClient] Licenses Updated successfully in LicensingClient
+
+LICENSE SYSTEM [2021227 23:30:48] Next license update check is after 2021-01-30T19:23:38
+
+
+LICENSE SYSTEM [2021227 23:30:48] Machine binding 1 mismatch: (value of current machine) 00325-80000-00000-AAOEM != 00326-10000-00000-AA074 (value in license file). Reason might be there is a hardware change on this machine after the license was activated.
+
+
+LICENSE SYSTEM [2021227 23:30:48] Current license is already valid and activated. Skipping license activation process (Provided username/password will be ignored).
+Built from '2019.4/staging' branch; Version is '2019.4.19f1 (ca5b14067cec) revision 13261588'; Using compiler version '191627012'
+OS: 'Windows 10 Home; OS build 18363.1379; Version 1909; 64bit' Language: 'en' Physical Memory: 32642 MB
+[Licensing::Module] Serial number assigned to: "F4-SMRT-ZWJT-G26K-T7Z9-XXXX"\nBatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Package Manager] Server::Start -- Port 53527 was selected
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2019.4.19f1\Editor\Unity.exe
+-quit
+-batchmode
+-logFile
+stdout.log
+-projectPath
+D:\vr
+-buildWindowsPlayer
+builds\mygame.exe
+Successfully changed project path to: D:\vr
+D:/vr
+Using Asset Import Pipeline V2.
+DisplayProgressbar: Unity Package Manager
+Adding genesis user token [Package Manager] Done resolving packages in 83.47s seconds
+An error occurred while resolving packages:
+  One or more packages could not be added to the local file system:
+    com.unity.terrain-tools: 23868:error:1408F119:SSL routines:ssl3_get_record:decryption failed or bad record mac:c:\build\output\unity\upm\dist\node\12.20.0\deps\openssl\openssl\ssl\record\ssl3_record.c:677:
+
+
+A re-import of the project may be required to fix the issue or a manual modification of D:/vr/Packages/manifest.json file.
+Exiting without the bug reporter. Application will terminate with return code 1
