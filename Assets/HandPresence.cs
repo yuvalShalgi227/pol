@@ -49,11 +49,8 @@ public class HandPresence : MonoBehaviour
         InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
 
 
-        foreach (var item in devices)
-        {
-            Debug.Log(item.name + item.characteristics);
-        }
-        Debug.Log("before devices count");
+    
+        //Debug.Log("before devices count");
         if (devices.Count > 0)
         {
             instantiate = true;
@@ -80,7 +77,7 @@ public class HandPresence : MonoBehaviour
         }
         else
         {
-            Debug.LogError("no devices");
+     //       Debug.LogError("no devices");
         }
     }
     void Update()

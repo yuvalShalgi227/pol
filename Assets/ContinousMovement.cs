@@ -38,7 +38,7 @@ public class ContinousMovement : MonoBehaviour
 
         Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.eulerAngles.y, 0);
         Vector3 direction = headYaw * new Vector3(inputAxis.x, 0, inputAxis.y);
-        Debug.Log("speed: " + speed);
+        //Debug.Log("speed: " + speed);
         character.Move(direction * Time.fixedDeltaTime * speed);
 
         //gravity
@@ -53,11 +53,11 @@ public class ContinousMovement : MonoBehaviour
         }
         
 
-        Debug.Log("Before Move");
+        //Debug.Log("Before Move");
 
         Vector3 fall = Vector3.up * fallingSpeed * Time.fixedDeltaTime;
 
-        Debug.Log("Move" + fall.ToString());
+        //Debug.Log("Move" + fall.ToString());
 
         character.Move(fall);
     }
