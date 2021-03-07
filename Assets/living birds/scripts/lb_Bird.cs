@@ -451,7 +451,8 @@ public class lb_Bird : MonoBehaviour {
 	}
 	
 	void FlyAway(){
-		if(!dead){
+		if(!dead && gameObject)
+        {
 			StopCoroutine("FlyToTarget");
 			anim.SetBool(landingBoolHash, false);
 			controller.SendMessage ("BirdFindTarget",gameObject);

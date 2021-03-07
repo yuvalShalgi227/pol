@@ -335,7 +335,9 @@
 
             CTIVertexOutput ShadowPassVertex(CTIVertexInput input)
             {
+				UNITY_INITIALIZE_OUTPUT(Input, o);
                 CTIVertexOutput output;
+
                 UNITY_SETUP_INSTANCE_ID(input);
                 UNITY_TRANSFER_INSTANCE_ID(input, output);
                 
